@@ -22,6 +22,20 @@ void ATankAIController::BeginPlay()
 
 }
 
+void ATankAIController::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	
+	if (GetPlayerTank())
+	{
+		// move towards player
+		// aim towards player
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+		//fire if can
+	}
+	
+}
+
 ATank* ATankAIController::GetControlledTank() const
 {
 	return Cast<ATank>(GetPawn());
@@ -35,6 +49,5 @@ ATank* ATankAIController::GetPlayerTank() const
 		UE_LOG(LogTemp, Error, TEXT("There is no player tank"));
 		return nullptr;
 	}
-
 	return Cast<ATank>(PlayerPawn);
 }
